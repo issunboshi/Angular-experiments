@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/issunboshi/Angular-experiments",
   "devDependencies": {
-    "gulp": "~3.8.8"
+    "gulp": "~3.8.8",
+    "express": "~4.9.0"
   }
 }

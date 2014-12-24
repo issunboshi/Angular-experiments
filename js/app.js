@@ -30,10 +30,17 @@
      * @return {Boolean} Does the directive's value match the current value of this.tab
      */
     this.isSet = function(tabName){
-    	console.log(this.tab);
       return this.tab === tabName;
     };
   });
+
+  app.controller('GalleryController', function(){
+     this.current = 0;
+     
+     this.setCurrent = function(newCurrent) {
+         this.current = newCurrent || 0;
+     };
+   });
 
  var gems = [{
     name: 'Azurite',

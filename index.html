@@ -3,16 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Simple Angular shop</title>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
 </head>
 <body ng-controller="StoreController as store">
-	<div class="product-row" ng-repeat="product in store.products">
+	<div class="product-row" ng-repeat="product in store.products" ngCloak>
 		<h3>{{product.name}}</h3>
 		<p>{{product.price | currency}}</p>
-		<ul class="images" ng-show="product.images.length">
-			<li class="image" ng-repeat="image in product.images">
-				<img ng-src="{{image}}" alt="">
-			</li>
-		</ul>
+		<div class="gallery" ng-controller="GalleryController as gallery">
+			<img ng-src="{{product.images[gallery.current]}}" alt="">
+			<ul class="images" ng-show="product.images.length">
+				<li class="image" ng-repeat="image in product.images" ng-click="gallery.setCurrent({{$index}})">
+					<img ng-src="{{image}}" alt="">
+				</li>
+			</ul>
+		</div>
 		<section class="tabs" ng-controller="TabController as tab">
 		   <ul class="nav nav-pills">
 			 <li ng-class="{active:tab.isSet(1)}">
@@ -36,7 +40,6 @@
 		   </div>
 		</section>
 	</div>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
 	<script src="./js/app.js"></script>
 </body>
 </html>

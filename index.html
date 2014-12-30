@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleStore">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple Angular shop</title>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+</head>
+<body ng-controller="StoreController as store">
+	<div class="product-row" ng-repeat="product in store.products" ngCloak>
+		<h3>{{product.name}}</h3>
+		<p>{{product.price | currency}}</p>
+		<div class="gallery" ng-controller="GalleryController as gallery">
+			<img ng-src="{{product.images[gallery.current]}}" alt="">
+			<ul class="images" ng-show="product.images.length">
+				<li class="image" ng-repeat="image in product.images" ng-click="gallery.setCurrent($index)">
+					<img ng-src="{{image}}" alt="">
+				</li>
+			</ul>
+		</div>
+		<section class="tabs" ng-controller="TabController as tab">
+		   <ul class="nav nav-pills">
+			 <li ng-class="{active:tab.isSet(1)}">
+			   <a ng-click="tab.setTab(1)" href>Description</a></li>
+			 <li ng-class="{active:tab.isSet(2)}">
+			   <a ng-click="tab.setTab(2)" href>Specs</a></li>
+			 <li ng-class="{active:tab.isSet(3)}">
+			   <a ng-click="tab.setTab(3)" href>Reviews</a></li>
+		   </ul>
+		   <li ng-show="tab.isSet(1)">
+			 <h4>Description</h4>
+			 <blockquote>{{product.description}}</blockquote>
+		   </li>
+		   <li ng-show="tab.isSet(2)">
+			 <h4>Specs</h4>
+			 <blockquote>Shine: {{product.shine}}</blockquote>
+		   </li>
+		   <li ng-show="tab.isSet(3)">
+				<h4>Reviews</h4>
+	            <blockquote ng-repeat="review in product.reviews">
+	               <strong>Stars: {{review.stars}}</strong>
+	        		{{review.body}}
+	               <cite class="clearfix">— {{review.author}}</cite>
+	            </blockquote>	
+				<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+					<!--  Live Preview -->
+					<blockquote ng-show="reviewCtrl.review.stars">
+						<strong>Stars: {{reviewCtrl.review.stars}}</strong>
+						{{reviewCtrl.review.body}}
+						<cite class="clearfix">— {{reviewCtrl.review.author}}</cite>
+					</blockquote>	
+
+					<!--  Review Form -->
+					<h4>Submit a Review</h4>
+					<fieldset class="form-group">
+						<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+						 <option value="">Rate the Product</option>
+						</select>
+					</fieldset>
+					<fieldset class="form-group">
+						<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+					</fieldset>
+					<fieldset class="form-group">
+						<input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+					</fieldset>
+					<fieldset class="form-group">
+						<input type="submit" class="btn" value="Submit Review" />
+					</fieldset>
+	           </form>
+		   </li>
+		</section>
+	</div>
+	<script src="./js/app.js"></script>
+</body>
+</html>

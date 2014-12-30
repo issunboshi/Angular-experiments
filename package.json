@@ -1,11 +1,8 @@
 {
   "name": "angular-experiments",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Project for testing out AngularJS",
-  "main": "client/index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
+  "main": "js/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/issunboshi/Angular-experiments.git"
@@ -17,7 +14,15 @@
   },
   "homepage": "https://github.com/issunboshi/Angular-experiments",
   "devDependencies": {
-    "gulp": "~3.8.8",
-    "express": "~4.9.0"
+    "autoprefixer": "~3.0.0",
+    "autoprefixer-core": "~3.0.0",
+    "gulp": "~3.8.5",
+    "gulp-autoprefixer": "0.0.9",
+    "gulp-load-plugins": "~0.5.3",
+    "gulp-postcss": "~1.0.2",
+    "gulp-sourcemaps": "~1.1.1",
+    "gulp-sass": "~1.2.4",
+    "gulp-minify-css": "~0.3.11",
+    "node-sass": "~2.0.0-beta"
   }
 }

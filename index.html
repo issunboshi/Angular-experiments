@@ -9,10 +9,7 @@
 <body ng-controller="StoreController as store">
 	<div class="container">
 		<div class="product" ng-repeat="product in store.products" ngCloak>
-			<header class="product__header">
-				<h3 class="product__title">{{product.name}}</h3>
-				<p class="product__content">{{product.price | currency}}</p>
-			</header>
+			<product-header></product-header>
 			<div class="gallery" ng-controller="GalleryController as gallery">
 				<img class="gallery__primary-image" ng-src="{{product.images[gallery.current]}}" alt="">
 				<ul class="gallery__listing" ng-show="product.images.length">

@@ -1,13 +1,13 @@
 (function() {
-  var app = angular.module('sampleStore', []);
+	var app = angular.module('sampleStore', []);
 
-  /**
-   * Generic controller for the store
-   * @param  {Array} The store product data
-   */
-  app.controller('StoreController', function(){
-	this.products = gems;
-  });
+	/**
+	* Generic controller for the store
+	* @param  {Array} The store product data
+	*/
+	app.controller('StoreController', function(){
+		this.products = gems;
+	});
 
 	/**
 	 * Set and get the current active tab value
@@ -34,22 +34,48 @@
 		};
 	});
 
+	/**
+	 * Set the default image to show and then allow the image to be changed when a user interacts
+	 */
 	app.controller('GalleryController', function(){
 		this.current = 0;
 		
+		/**
+		 * Take a value from a directive and set that
+		 * @param {Number} newCurrent The index of the image to be shown
+		 */
 		this.setCurrent = function(newCurrent) {
 			this.current = newCurrent || 0;
 		};
 	});
 
+	/**
+	 * Allow interaction with the review form
+	 */
 	app.controller('ReviewController', function(){
 		this.review = {};
 
+		/**
+		 * Add a review to the model
+		 * @param {object} product The current product object
+		 */
 		this.addReview = function(product) {
+			// Add the current date to the object
 			this.review.createdOn = Date.now();
+
+			// Update the product object in the model with the new review
 			product.reviews.push(this.review);
+
+			// Reset the temporary review object so the view removes the preview
 			this.review = {};
 		}
+	});
+
+	app.directive("productHeader", function(){
+	  return {
+	    restrict: 'E',
+	    templateUrl: 'directives/product/header.html'
+	  };
 	});
 
 	var gems = [{
